@@ -1,4 +1,4 @@
-#Tic Tac Toe
+# Tic Tac Toe
 
 A simple version of tic tac toe.
 
