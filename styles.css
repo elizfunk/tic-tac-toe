@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px;
+}
+
+h1, h2 {
+  color: darkslategrey;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#board {
+  margin-top: 40px;
+}
+
+.row {
+  display: flex;
+}
+
+.square {
+  height: 50px;
+  width: 50px;
+}
+
+.white-background {
+  background-color: white;
+}
+
+.game-square {
+  height: 90px;
+  width: 90px;
+  background-color: black;
+  padding: 20px;
+}
