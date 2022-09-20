@@ -9,15 +9,25 @@ class TicTacToe {
     this.rows = 3
     this.columns = 3
     this.board = document.getElementById('board')
+    this.boardData = this.createInitialBoardData()
+    this.touched = []
     this.playerOne = {
       letter: "X"
     }
     this.playerTwo = {
       letter: "O"
     }
-    this.boardData = this.createInitialBoardData()
     this.activePlayer = this.playerOne
     this.winner = null
+  }
+
+  checkTouchedForWinner() {
+    for (let i = 0; i < this.touched.length; i++) {
+      // for each touched coordinate
+          // check up and down that column
+          // check left and right that row
+          // if center touched check diagonal left to right and diagonal right to left
+    }
   }
 
   updateIsWinner() {
@@ -160,23 +170,46 @@ class TicTacToe {
     }
 
     const [pRow, pCol] = event.target.id.split('-')
+    // this.touched.push([pRow, pCol])
 
     const pieceIsEmpty = (this.boardData[pRow][pCol].letter === null)
 
     if (pieceIsEmpty) {
-      event.target.innerText = `${this.activePlayer.letter}`
-      this.boardData[pRow][pCol].letter = this.activePlayer.letter
-
-      if (this.activePlayer === this.playerOne) {
-        this.activePlayer = this.playerTwo
-      } else {
-        this.activePlayer = this.playerOne
-      }
-
-      const activePlayerEl = document.getElementById('active-player')
-      activePlayerEl.innerText = `Active player: ${this.activePlayer.letter}`
+      event.target.innerText = 'X'
+      this.boardData[pRow][pCol].letter = 'X' // update board status
 
       this.updateIsWinner()
+
+      if (this.winner) return
+
+      for (let i = 0; i < this.rows; i++) {
+        for (let j = 0; j < this.columns; j++) {
+          if (!this.boardData[i][j].letter) {
+            this.boardData[i][j].letter = 'O'
+            console.log("this.boardData[i][j]")
+            const elId = `${i}-${j}`
+            const oElement = document.getElementById(elId)
+            oElement.innerText = 'O'
+
+            this.updateIsWinner()
+
+            return
+          }
+        }
+      }
+
+      // if (this.activePlayer === this.playerOne) {
+      //   this.activePlayer = this.playerTwo
+      // } else {
+      //   this.activePlayer = this.playerOne
+      // }
+
+      // const activePlayerEl = document.getElementById('active-player')
+      // activePlayerEl.innerText = `Active player: ${this.activePlayer.letter}`
+
+      console.log("this.touched:", this.touched)
+
+     
       
     } else {
       window.alert("Only spaces that are empty and have no empty spaces below them can be played.")
